@@ -1,15 +1,17 @@
-# liquibase-multimodule-deploy
+# Multi-module and Multi-database deployment using Liquibase
 Multimodule and Multidatabase deployment using Liquibase 
 
 This demo is developed for Microsoft Sql Server but is easily adjusted to work for Postgres or Mysql.
 
 # To deploy all modules:
 Execute from the \src directory:
-mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase
+
+''''mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase''''
 
 # To deploy a single module:
 Execute the same command from the root of the module directory (For example in \src\ArchiveDB\):
-mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase
+
+'''mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase'''
 
 
 # Prerequisites
