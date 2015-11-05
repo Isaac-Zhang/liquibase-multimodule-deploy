@@ -1,0 +1,20 @@
+Multimodule & Multidatabase Liquibase Deployment using Maven.
+
+In many environments you will have either many databases or one database consisting of several modules. 
+You may want to upgrade all of them at the same time, or one by one.
+
+We can think of modules as either multiple schemas within a single database - or - several databases.
+
+	In the case of managing modules using databases we can think of the case of two databases: CRM_DB and CRM_HISTORY.
+	CRM_DB is the main application database and CRM_HISTORY is the database where we stored audit information.
+
+	Or, we might want to handle different modules of a single database as schemas. 
+	Each module is realized as a schema in the database: Customer schema, Order schema, HR schema etc.
+
+No matter if we want to manage our modules using schemas or databases, we can still follow the following approach.
+
+Each module can be deployed individually but usually we want to deploy all the modules at the same time.
+
+For the following set-up to work we assume that all the modules will be installed in the same server. 
+This works well for DBMS like MSSQL and Postgresql where we can host multiple databases within a single server. (This is also possible in Oracle 12c but I have not tested their implementation yet.)
+The main reason for this requirement is that we only specify the servername/username/password once.
