@@ -6,12 +6,16 @@ This demo is developed for Microsoft Sql Server but is easily adjusted to work f
 # To deploy all modules:
 Execute from the \src directory:
 
-''''mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase''''
+```Batchfile
+mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase
+```
 
 # To deploy a single module:
 Execute the same command from the root of the module directory (For example in \src\ArchiveDB\):
 
-'''mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase'''
+```Batchfile
+mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase
+```
 
 
 # Prerequisites
