@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<groupId>peter.henell</groupId>
+	<artifactId>multimodule-deploy</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>Aggregate POM for MultiModule Deploy</name>
+	<description>Main packaging and installation pom</description>
+
+	<properties>
+		<database.baseurl>jdbc:sqlserver://${database.server};databaseName=${database.name};</database.baseurl> 
+		<liquibase.logLevel>info</liquibase.logLevel>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<descriptors>
+							<descriptor>${project.basedir}/assembly.xml</descriptor>
+						</descriptors>
+					</configuration>
+					<executions>
+						<execution>
+							<id>make-assembly</id>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>3.4.1</version>
+					<configuration>
+						<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+						<changeLogFile>${project.basedir}/update.xml</changeLogFile>
+						<driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+						<url>${database.baseurl}</url>
+						<username>${database.username}</username>
+						<password>${database.password}</password>
+						<liquibaseShouldRun>true</liquibaseShouldRun>
+						<logLevel>${liquibase.logLevel}</logLevel>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>update</goal>
+							</goals>
+						</execution>
+					</executions>
+
+					<dependencies>
+						<dependency>
+							<groupId>com.microsoft.sqlserver</groupId>
+							<artifactId>sqljdbc4</artifactId>
+							<version>4.1</version>
+							<scope>system</scope>
+							<systemPath>${project.basedir}/liquibase-app/lib/sqljdbc41.jar</systemPath>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.4.1</version>
+					<executions>
+						<execution>
+							<id>enforce-property</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireProperty>
+										<property>database.server</property>
+										<message>You must set the database.server property!</message>
+									</requireProperty>
+									<requireProperty>
+										<property>database.username</property>
+										<message>You must set the database.username property!</message>
+									</requireProperty>
+									<requireProperty>
+										<property>database.password</property>
+										<message>You must set the database.password property!</message>
+									</requireProperty>
+								</rules>
+								<fail>true</fail>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<!-- Validate external properties, they must be set before executing mvn install -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+			</plugin>
+
+			<!-- Packages all of ODS into a big zip-file -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>	
+		</plugins>
+	</build>
+
+	<modules>
+		<module>CustomerDB</module>
+		<module>OrdersDB</module>
+		<module>ArchiveDB</module>
+	</modules>
+	
+</project>
