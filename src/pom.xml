@@ -10,6 +10,13 @@
 	<name>Aggregate POM for MultiModule Deploy</name>
 	<description>Main packaging and installation pom</description>
 
+	<modules>
+		<module>CustomerDB</module>
+		<module>OrdersDB</module>
+		<module>ArchiveDB</module>
+	</modules>
+
+
 	<properties>
 		<database.baseurl>jdbc:sqlserver://${database.server};databaseName=${database.name};</database.baseurl> 
 		<liquibase.logLevel>info</liquibase.logLevel>
@@ -39,6 +46,118 @@
 				</plugin>
 
 				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>sql-maven-plugin</artifactId>
+					<version>1.4</version>
+					<configuration>
+						<driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
+						<url>${database.baseurl}</url>
+						<username>${database.username}</username>
+						<password>${database.password}</password>
+						<autocommit>true</autocommit>
+
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.microsoft.sqlserver</groupId>
+							<artifactId>sqljdbc4</artifactId>
+							<version>4.1</version>
+							<scope>system</scope>
+							<systemPath>${project.basedir}/../../sqljdbc41.jar</systemPath>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>StartDeploy</id>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>execute</goal>
+							</goals>
+							<configuration>
+								<sqlCommand>IF OBJECT_ID('DATABASEDEPLOYLOG') IS NULL 
+CREATE TABLE DATABASEDEPLOYLOG (
+      [Deploy.StartedAt] DATETIME2(0) NOT NULL 
+    , [Deploy.Action] VARCHAR(100)
+    , [Deploy.ActionOccuredOn] DATETIME2 NOT NULL CONSTRAINT [Def_Deploy.ActionOccuredOn] DEFAULT (SYSDATETIME())
+    , [Deploy.TriggeredFromPath] VARCHAR(4000)
+    , [Deploy.TriggeredOnHostName] VARCHAR(100)
+    , [Package.Version] VARCHAR(500)
+    , [Package.BuildDate] DATETIME2(0)
+    , [Package.Binary] VARBINARY(max)
+    , [Database.Server] VARCHAR(500)
+    , [Database.Name] VARCHAR(100)
+    , [Database.Username] VARCHAR(100)
+    , [Database.Version] VARCHAR(max)
+);
+INSERT INTO dbo.DATABASEDEPLOYLOG
+        ( [Deploy.StartedAt] ,
+          [Deploy.Action] ,
+          [Deploy.TriggeredFromPath] ,
+          [Deploy.TriggeredOnHostName] ,
+          [Package.Version] ,
+          --[Package.BuildDate] ,
+          --[Package.Binary] ,
+          [Database.Server] ,
+          [Database.Name] ,
+          [Database.Username] ,
+          [Database.Version]
+        )
+VALUES  ( '${maven.build.timestamp}' , 
+          'Started' , 
+          '${project.basedir}' , 
+          '${hostname}' , 
+          '${project.version}' , 
+          '${database.server}' ,
+          '${database.name}' , 
+          '${database.username}' , 
+          @@VERSION
+        )
+								</sqlCommand>
+								<printResultSet>true</printResultSet>
+								<autocommit>true</autocommit>
+								<onError>abort</onError>
+							</configuration>
+						</execution>
+
+						<execution>
+							<id>CompleteDeploy</id>
+							<phase>test</phase>
+							<goals>
+								<goal>execute</goal>
+							</goals>
+							<configuration>
+								<sqlCommand>
+INSERT INTO dbo.DATABASEDEPLOYLOG
+        ( [Deploy.StartedAt] ,
+          [Deploy.Action] ,
+          [Deploy.TriggeredFromPath] ,
+          [Deploy.TriggeredOnHostName] ,
+          [Package.Version] ,
+          [Database.Server] ,
+          [Database.Name] ,
+          [Database.Username] ,
+          [Database.Version]
+        )
+VALUES  ( '${maven.build.timestamp}' , 
+          'Completed' , 
+          '${project.basedir}' , 
+          '${hostname}' , 
+          '${project.version}' , 
+          '${database.server}' ,
+          '${database.name}' , 
+          '${database.username}' , 
+          @@VERSION
+        )
+								</sqlCommand>
+								<printResultSet>true</printResultSet>
+								<autocommit>true</autocommit>
+								<onError>abort</onError>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
 					<groupId>org.liquibase</groupId>
 					<artifactId>liquibase-maven-plugin</artifactId>
 					<version>3.4.1</version>
@@ -54,7 +173,7 @@
 					</configuration>
 					<executions>
 						<execution>
-							<phase>process-resources</phase>
+							<phase>compile</phase>
 							<goals>
 								<goal>update</goal>
 							</goals>
@@ -120,10 +239,31 @@
 		</plugins>
 	</build>
 
-	<modules>
-		<module>CustomerDB</module>
-		<module>OrdersDB</module>
-		<module>ArchiveDB</module>
-	</modules>
-	
+
+
+	<profiles>
+		<profile>
+			<id>nix</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<hostname>${env.HOSTNAME}</hostname>
+			</properties>
+		</profile>
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+			<properties>
+				<hostname>${env.COMPUTERNAME}</hostname>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>
