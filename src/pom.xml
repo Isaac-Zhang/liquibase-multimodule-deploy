@@ -63,7 +63,7 @@
 							<artifactId>sqljdbc4</artifactId>
 							<version>4.1</version>
 							<scope>system</scope>
-							<systemPath>${project.basedir}/../../sqljdbc41.jar</systemPath>
+							<systemPath>${project.basedir}/liquibase-app/lib/sqljdbc41.jar</systemPath>
 						</dependency>
 					</dependencies>
 					<executions>
@@ -264,6 +264,7 @@ VALUES  ( '${maven.build.timestamp}' ,
 				<hostname>${env.COMPUTERNAME}</hostname>
 			</properties>
 		</profile>
+		
 	</profiles>
 
 </project>
