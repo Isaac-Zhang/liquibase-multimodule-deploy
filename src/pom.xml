@@ -20,6 +20,7 @@
 	<properties>
 		<database.baseurl>jdbc:sqlserver://${database.server};databaseName=${database.name};</database.baseurl> 
 		<liquibase.logLevel>info</liquibase.logLevel>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
@@ -116,7 +117,7 @@ VALUES  ( '${maven.build.timestamp}' ,
 								<printResultSet>true</printResultSet>
 								<autocommit>true</autocommit>
 								<onError>abort</onError>
-							</configuration>
+							</configuration>	
 						</execution>
 
 						<execution>
@@ -163,7 +164,7 @@ VALUES  ( '${maven.build.timestamp}' ,
 					<version>3.4.1</version>
 					<configuration>
 						<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-						<changeLogFile>${project.basedir}/update.xml</changeLogFile>
+						
 						<driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
 						<url>${database.baseurl}</url>
 						<username>${database.username}</username>
@@ -173,10 +174,26 @@ VALUES  ( '${maven.build.timestamp}' ,
 					</configuration>
 					<executions>
 						<execution>
+							<id>deploy-database</id>
 							<phase>compile</phase>
 							<goals>
 								<goal>update</goal>
 							</goals>
+							<configuration>
+								<changeLogFile>${project.basedir}/update.xml</changeLogFile>
+							</configuration>
+						</execution>
+					
+						<execution>
+							<id>install-tsqlt</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>update</goal>
+							</goals>
+							<configuration>
+								<liquibase.logging>severe</liquibase.logging>
+								<changeLogFile>${project.basedir}/../tsqlt/update.xml</changeLogFile>
+							</configuration>
 						</execution>
 					</executions>
 

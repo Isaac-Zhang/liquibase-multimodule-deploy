@@ -1,0 +1,38 @@
+--liquibase formatted sql
+
+--changeSet proc:Initial-tSQLt-NewTestClass-0 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:false
+IF OBJECT_ID('tSQLt.NewTestClass', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[NewTestClass] @ClassName nvarchar(MAX) AS BEGIN SELECT ret = 1 END')
+GO
+
+
+
+--changeSet proc:Initial-tSQLt-NewTestClass-1 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:true
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_NULLS ON
+GO
+---Build+
+ALTER PROCEDURE [tSQLt].[NewTestClass]
+    @ClassName NVARCHAR(MAX)
+AS
+BEGIN
+  BEGIN TRY
+    EXEC tSQLt.Private_DisallowOverwritingNonTestSchema @ClassName;
+
+    EXEC tSQLt.DropClass @ClassName = @ClassName;
+
+    DECLARE @QuotedClassName NVARCHAR(MAX);
+    SELECT @QuotedClassName = tSQLt.Private_QuoteClassNameForNewTestClass(@ClassName);
+
+    EXEC ('CREATE SCHEMA ' + @QuotedClassName);  
+    EXEC tSQLt.Private_MarkSchemaAsTestClass @QuotedClassName;
+  END TRY
+  BEGIN CATCH
+    DECLARE @ErrMsg NVARCHAR(MAX);SET @ErrMsg = ERROR_MESSAGE() + ' (Error originated in ' + ERROR_PROCEDURE() + ')';
+    DECLARE @ErrSvr INT;SET @ErrSvr = ERROR_SEVERITY();
+    
+    RAISERROR(@ErrMsg, @ErrSvr, 10);
+  END CATCH;
+END;
+---Build-
+GO

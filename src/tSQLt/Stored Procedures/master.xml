@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	
+	<!-- START OF FILE LIST -->
+    
+	<include file="tSQLt.ApplyConstraint.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.ApplyTrigger.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.AssertEmptyTable.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.AssertEquals.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.AssertEqualsString.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.AssertEqualsTable.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.AssertLike.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.AssertNotEquals.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.AssertObjectExists.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.AssertResultSetsHaveSameMetaData.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.CaptureOutput.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.DefaultResultFormatter.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.DropClass.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.ExpectException.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.ExpectNoException.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Fail.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.FakeFunction.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.FakeTable.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.GetNewTranName.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.LogCapturedOutput.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.NewConnection.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.NewTestClass.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.NullTestResultFormatter.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_ApplyCheckConstraint.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_ApplyForeignKeyConstraint.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_CleanTestResult.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_CompareTables.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_CompareTablesFailIfUnequalRowsExists.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_CreateFakeFunction.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_CreateFakeOfTable.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_CreateProcedureSpy.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_CreateResultTableForCompareTables.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_DisallowOverwritingNonTestSchema.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_GetSetupProcedureName.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_MarkFakeTable.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_MarkObjectBeforeRename.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_MarkSchemaAsTestClass.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_OutputTestResults.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_Print.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_PrintXML.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_RenameObjectToUniqueName.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_RenameObjectToUniqueNameUsingObjectId.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_Run.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_RunAll.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_RunTest.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_RunTestClass.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_SaveTestNameForSession.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_SetFakeViewOff_SingleView.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_SetFakeViewOn_SingleView.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_ValidateFakeTableParameters.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_ValidateObjectsCompatibleWithFakeFunction.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_ValidateProcedureCanBeUsedWithSpyProcedure.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Private_ValidateThatAllDataTypesInTableAreSupported.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.RemoveObject.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.RenameClass.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.ResultSetFilter.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Run.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.RunAll.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.RunTest.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.RunTestClass.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.RunWithNullResults.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.RunWithXmlResults.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.SetFakeViewOff.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.SetFakeViewOn.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.SetTestResultFormatter.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.SpyProcedure.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.StubRecord.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.SuppressOutput.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.TableToText.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.Uninstall.sql" relativeToChangelogFile="true" />
+	<include file="tSQLt.XmlResultFormatter.sql" relativeToChangelogFile="true" />
+    <!-- END OF FILE LIST -->
+
+</databaseChangeLog>

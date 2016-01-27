@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	
+	<!-- START OF FILE LIST -->
+    
+    <include file="tSQLt.Private_SqlVariantFormatter.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetIdentityDefinition.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetDefaultConstraintDefinition.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_ResolveFakeTableNamesForBackwardCompatibility.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_QuoteClassNameForNewTestClass.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.GetTestResultFormatter.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetCleanObjectName.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.F_Num.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Info.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetCleanSchemaName.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetConstraintType.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetOriginalTableName.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetOriginalTableInfo.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetFullTypeName.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetForeignKeyRefColumns.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetForeignKeyParColumns.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetLastTestNameIfNotProvided.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetSchemaId.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.TestCaseSummary.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetQuotedTableNameForConstraint.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetQuotedFullName.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetCommaSeparatedColumnList.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_ResolveObjectName.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_ResolveSchemaName.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_IsTestClass.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetForeignKeyDefinition.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_GetDataTypeOrComputedColumnDefinition.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_FindConstraint.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_ResolveApplyConstraintParameters.sql" relativeToChangelogFile="true" />
+    <include file="tSQLt.Private_ResolveName.sql" relativeToChangelogFile="true" />
+    
+    <!-- END OF FILE LIST -->
+
+</databaseChangeLog>

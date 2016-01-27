@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+  <include file="../tsqlt/Assemblies/master.xml" />
+  <include file="../tsqlt/Security/Schemas/master.xml" />
+  
+  <include file="../tsqlt/Types/User-defined Data Types/master.xml" />
+  <include file="../tsqlt/Tables/master.xml" />
+  <include file="../tsqlt/Views/master.xml" /> 
+  <include file="../tsqlt/Functions/master.xml" />
+  <include file="../tsqlt/Stored Procedures/master.xml" />
+ 
+</databaseChangeLog>
