@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeSet proc:Initial-tSQLt-StubRecord-0 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:false
-IF OBJECT_ID('tSQLt.StubRecord', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[StubRecord] @BintObjId bigint,@SnTableName nvarchar(MAX) AS BEGIN SELECT ret = 1 END')
+IF OBJECT_ID('tSQLt.StubRecord', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[StubRecord] @SnTableName nvarchar(MAX),@BintObjId bigint AS BEGIN SELECT ret = 1 END')
 GO
 
 

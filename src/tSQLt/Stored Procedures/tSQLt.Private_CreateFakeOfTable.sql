@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeSet proc:Initial-tSQLt-Private_CreateFakeOfTable-0 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:false
-IF OBJECT_ID('tSQLt.Private_CreateFakeOfTable', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[Private_CreateFakeOfTable] @Identity bit,@ComputedColumns bit,@Defaults bit,@SchemaName nvarchar(MAX),@TableName nvarchar(MAX),@NewNameOfOriginalTable nvarchar(MAX) AS BEGIN SELECT ret = 1 END')
+IF OBJECT_ID('tSQLt.Private_CreateFakeOfTable', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[Private_CreateFakeOfTable] @SchemaName nvarchar(MAX),@TableName nvarchar(MAX),@NewNameOfOriginalTable nvarchar(MAX),@Identity bit,@ComputedColumns bit,@Defaults bit AS BEGIN SELECT ret = 1 END')
 GO
 
 

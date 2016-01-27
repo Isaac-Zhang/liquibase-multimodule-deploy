@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeSet proc:Initial-tSQLt-FakeTable-0 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:false
-IF OBJECT_ID('tSQLt.FakeTable', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[FakeTable] @Identity bit,@ComputedColumns bit,@Defaults bit,@TableName nvarchar(MAX),@SchemaName nvarchar(MAX) AS BEGIN SELECT ret = 1 END')
+IF OBJECT_ID('tSQLt.FakeTable', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[FakeTable] @TableName nvarchar(MAX),@SchemaName nvarchar(MAX),@Identity bit,@ComputedColumns bit,@Defaults bit AS BEGIN SELECT ret = 1 END')
 GO
 
 
@@ -32,6 +32,8 @@ BEGIN
      FROM tSQLt.Private_ResolveFakeTableNamesForBackwardCompatibility(@TableName, @SchemaName);
    
    EXEC tSQLt.Private_ValidateFakeTableParameters @SchemaName,@OrigTableName,@OrigSchemaName;
+
+   EXEC tSQLt.PrepareTableForFaking @TableName, @SchemaName;
 
    EXEC tSQLt.Private_RenameObjectToUniqueName @SchemaName, @TableName, @NewNameOfOriginalTable OUTPUT;
 

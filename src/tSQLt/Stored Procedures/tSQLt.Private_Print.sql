@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeSet proc:Initial-tSQLt-Private_Print-0 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:false
-IF OBJECT_ID('tSQLt.Private_Print', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[Private_Print] @Severity int,@Message nvarchar(MAX) AS BEGIN SELECT ret = 1 END')
+IF OBJECT_ID('tSQLt.Private_Print', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[Private_Print] @Message nvarchar(MAX),@Severity int AS BEGIN SELECT ret = 1 END')
 GO
 
 

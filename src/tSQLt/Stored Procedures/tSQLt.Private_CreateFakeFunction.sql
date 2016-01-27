@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeSet proc:Initial-tSQLt-Private_CreateFakeFunction-0 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:false
-IF OBJECT_ID('tSQLt.Private_CreateFakeFunction', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[Private_CreateFakeFunction] @FunctionObjectId int,@FakeFunctionObjectId int,@IsScalarFunction bit,@FunctionName nvarchar(MAX),@FakeFunctionName nvarchar(MAX) AS BEGIN SELECT ret = 1 END')
+IF OBJECT_ID('tSQLt.Private_CreateFakeFunction', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[Private_CreateFakeFunction] @FunctionName nvarchar(MAX),@FakeFunctionName nvarchar(MAX),@FunctionObjectId int,@FakeFunctionObjectId int,@IsScalarFunction bit AS BEGIN SELECT ret = 1 END')
 GO
 
 

@@ -186,7 +186,7 @@ VALUES  ( '${maven.build.timestamp}' ,
 					
 						<execution>
 							<id>install-tsqlt</id>
-							<phase>compile</phase>
+							<phase>test</phase>
 							<goals>
 								<goal>update</goal>
 							</goals>

@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeSet func:Initial-tSQLt-Private_GetDataTypeOrComputedColumnDefinition-0 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:false
-IF OBJECT_ID('tSQLt.Private_GetDataTypeOrComputedColumnDefinition', 'IF') IS NULL EXEC('CREATE FUNCTION [tSQLt].[Private_GetDataTypeOrComputedColumnDefinition](@UserTypeId int,@MaxLength int,@Precision int,@Scale int,@ObjectId int,@ColumnId int,@ReturnDetails bit,@CollationName nvarchar(MAX)) RETURNS TABLE AS RETURN (SELECT ret = 1)')
+IF OBJECT_ID('tSQLt.Private_GetDataTypeOrComputedColumnDefinition', 'IF') IS NULL EXEC('CREATE FUNCTION [tSQLt].[Private_GetDataTypeOrComputedColumnDefinition](@UserTypeId int,@MaxLength int,@Precision int,@Scale int,@CollationName nvarchar(MAX),@ObjectId int,@ColumnId int,@ReturnDetails bit) RETURNS TABLE AS RETURN (SELECT ret = 1)')
 GO
 
 

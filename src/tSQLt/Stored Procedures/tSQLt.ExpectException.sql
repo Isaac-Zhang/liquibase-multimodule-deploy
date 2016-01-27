@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeSet proc:Initial-tSQLt-ExpectException-0 endDelimiter:\nGO splitStatements:true stripComments:false runOnChange:false
-IF OBJECT_ID('tSQLt.ExpectException', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[ExpectException] @ExpectedSeverity int,@ExpectedState int,@ExpectedErrorNumber int,@ExpectedMessage nvarchar(MAX),@Message nvarchar(MAX),@ExpectedMessagePattern nvarchar(MAX) AS BEGIN SELECT ret = 1 END')
+IF OBJECT_ID('tSQLt.ExpectException', 'P') IS NULL EXEC('CREATE PROCEDURE [tSQLt].[ExpectException] @ExpectedMessage nvarchar(MAX),@ExpectedSeverity int,@ExpectedState int,@Message nvarchar(MAX),@ExpectedMessagePattern nvarchar(MAX),@ExpectedErrorNumber int AS BEGIN SELECT ret = 1 END')
 GO
 
 
