@@ -1,7 +1,13 @@
 # Multi-module and Multi-database deployment using Liquibase
 Multimodule and Multidatabase deployment using Liquibase 
 
-This demo is developed for Microsoft Sql Server but is easily adjusted to work for Postgres or Mysql.
+The purpose of this repo is to show how it is possible to handle multi module deployments of Liquibase using maven.
+A multi module database solution could be - either several databases - or - using schemas to separate the modules. Each module can be developed, released and deployed independently.
+
+This current setup uses several databases to separate the modules. Each database have their own folder inside the repo where their objects can be managed.
+
+This demo is developed for Microsoft Sql Server but is easily adjusted to work for Postgres or Mysql etc.
+You would need to change the driver, url and make sure the sql scripts work on your DBMS.
 
 # To deploy all modules:
 Execute from the \src directory:
@@ -16,6 +22,15 @@ Execute the same command from the root of the module directory (For example in \
 ```Batchfile
 mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase
 ```
+
+# To build and install tsqlt into your local repository.
+(The tSQLt module is then available for the rest of the modules.)
+Execute from the /src/tsqlt directory:
+
+```Batchfile
+mvn install
+```
+
 
 
 # Prerequisites
