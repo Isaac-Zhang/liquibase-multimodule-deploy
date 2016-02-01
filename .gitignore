@@ -2,3 +2,4 @@ src/target/
 src/ArchiveDB/target/
 src/CustomerDB/target/
 src/OrdersDB/target/
+src/tSQLt/target/

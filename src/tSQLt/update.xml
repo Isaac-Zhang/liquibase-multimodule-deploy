@@ -6,13 +6,13 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-  <include file="../tsqlt/Assemblies/master.xml" />
-  <include file="../tsqlt/Security/Schemas/master.xml" />
+  <include file="Assemblies/master.xml" relativeToChangelogFile="true" />
+  <include file="Security/Schemas/master.xml" relativeToChangelogFile="true" />
                  
-  <include file="../tsqlt/Types/User-defined Data Types/master.xml" />
-  <include file="../tsqlt/Tables/master.xml" />
-  <include file="../tsqlt/Views/master.xml" /> 
-  <include file="../tsqlt/Functions/master.xml" />
-  <include file="../tsqlt/Stored Procedures/master.xml" />
+  <include file="Types/User-defined Data Types/master.xml" relativeToChangelogFile="true" />
+  <include file="Tables/master.xml" relativeToChangelogFile="true" />
+  <include file="Views/master.xml" relativeToChangelogFile="true" /> 
+  <include file="Functions/master.xml" relativeToChangelogFile="true" />
+  <include file="Stored Procedures/master.xml" relativeToChangelogFile="true" />
  
 </databaseChangeLog>
