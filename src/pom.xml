@@ -16,6 +16,13 @@
 		<module>ArchiveDB</module>
 	</modules>
 
+	<dependencies>
+		<dependency>
+			<groupId>peter.henell</groupId>
+			<artifactId>tsqlt</artifactId>
+			<version>1.0.0-snapshot</version>
+		</dependency>
+	</dependencies>
 
 	<properties>
 		<database.baseurl>jdbc:sqlserver://${database.server};databaseName=${database.name};</database.baseurl> 
@@ -164,7 +171,7 @@ VALUES  ( '${maven.build.timestamp}' ,
 					<version>3.4.1</version>
 					<configuration>
 						<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-						
+
 						<driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver>
 						<url>${database.baseurl}</url>
 						<username>${database.username}</username>
@@ -183,16 +190,16 @@ VALUES  ( '${maven.build.timestamp}' ,
 								<changeLogFile>${project.basedir}/update.xml</changeLogFile>
 							</configuration>
 						</execution>
-					
+
 						<execution>
 							<id>install-tsqlt</id>
-							<phase>test</phase>
+							<phase>compile</phase>
 							<goals>
 								<goal>update</goal>
 							</goals>
 							<configuration>
 								<liquibase.logging>severe</liquibase.logging>
-								<changeLogFile>${project.basedir}/../tsqlt/update.xml</changeLogFile>
+								<changeLogFile>${project.basedir}/target/tsqlt/update.xml</changeLogFile>							  
 							</configuration>
 						</execution>
 					</executions>
@@ -238,10 +245,42 @@ VALUES  ( '${maven.build.timestamp}' ,
 						</execution>
 					</executions>
 				</plugin>
+			
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.10</version>
+					<executions>
+						<execution>
+							<id>copy</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>unpack</goal>
+							</goals>
+							<configuration>
+								<artifactItems>
+								  <artifactItem>
+										<groupId>peter.henell</groupId>
+										<artifactId>tsqlt</artifactId>
+										<version>1.0.0-snapshot</version>
+										<!-- Classifier must match the name of the id from the assembly.xml in the dependency -->
+										<classifier>resources</classifier>
+										<type>zip</type>
+										<overWrite>true</overWrite>
+										<outputDirectory>target/tsqlt</outputDirectory>
+								  </artifactItem>
+								</artifactItems>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
 		<plugins>
+
+			
+
 			<!-- Validate external properties, they must be set before executing mvn install -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -281,7 +320,7 @@ VALUES  ( '${maven.build.timestamp}' ,
 				<hostname>${env.COMPUTERNAME}</hostname>
 			</properties>
 		</profile>
-		
+
 	</profiles>
 
 </project>
