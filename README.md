@@ -31,12 +31,22 @@ Execute from the /src/tsqlt directory:
 mvn install
 ```
 
+You can then install tSQLt on the modules by running maven using the unit-tests profile.
+You can do this on individual modules or on the parent pom to install on all of the modules.
 
+```Batchfile
+mvn install -Ddatabase.server=localhost -Ddatabase.username=liquibase -Ddatabase.password=liquibase -Punit-tests
+```
 
 # Prerequisites
 * Maven installed and preferably in your PATH.
+* JAVA_HOME set to a correct java JRE path [http://www.peterhenell.se/msg/Batch---Automatically-set-JAVA_HOME-to-current-installed-version-of-java]
 * The databases must exist and be located on the same server (CustomerDB, OrdersDB and ArchiveDB).
 * You must have a logon/user with permissions to create tables etc (will probably need sysadmin for production use).
+
+## Additional prerequisites for MSSQL:
+* TCP-IP must be enabled
+* The server must be in mixed mode (SQL Server and Windows Authentication)
 
 # Easily customizable for other DBMS. 
 Simply edit the jdbc-url and the the jdbc driver to match Postgres or Mysql.
